@@ -6,7 +6,7 @@ class Task {
     }
     dosomething(message = 'message'){
         console.log(message);
-    }
+      }
 
 }
 class SubTask extends Task{

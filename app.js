@@ -1,3 +1,4 @@
+const fetch = require('node-fetch');
 async function getUser(id) {
     return  { id: 1 };
 }
@@ -9,6 +10,7 @@ class DataService{
             let data = await response.json();
             return data;
         } catch (e) {
+            console.log(e);
             throw new Error('Не удалось получить данные от сервера')
         }
 

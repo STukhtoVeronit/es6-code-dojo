@@ -4,27 +4,53 @@ async function getUser(id) {
 }
 
 class DataService{
+    constructor (url){
+        this.url = url;
+    }
+
      async getUser(id) {
         try {
-            let response = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`);
+            let response = await fetch(`${this.url}/users/${id}`);
             let data = await response.json();
             return data;
         } catch (e) {
             console.log(e);
-            throw new Error('Не удалось получить данные от сервера')
+            throw new Error('Не удалось получить данные пользователя')
         }
-
-        // let refetch(`https://jsonplaceholder.typicode.com/users/${id}`)
-        //     .then(response => response.json());
     }
-};
+
+     async getPost(userId) {
+        try {
+            let response = await fetch(`${this.url}/posts?userId=${userId}`);
+            let data = await response.json();
+            return data;
+        } catch (e) {
+            console.log(e);
+            throw new Error('Не удалось получить посты')
+        }
+    }
+
+     async getComments(postId) {
+        try {
+            let response = await fetch(`${this.url}/comments?postId=${postId}`);
+            let data = await response.json();
+            return data;
+        } catch (e) {
+            console.log(e);
+            throw new Error('Не удалось получить комментарии')
+        }
+    }
+}
 
 (async () => {
-    let dataService = new DataService();
+    let dataService = new DataService('https://jsonplaceholder.typicode.com');
 
     try {
         let user = await dataService.getUser(1);
-        console.log(user);
+        let posts = await dataService.getPost(user.id);
+        let comments = await dataService.getComments(posts[0].id);
+
+        console.log(comments);
     } catch (e) {
         console.error(e);
     }

@@ -30,13 +30,16 @@ class   Task {
 }
 Task.count = 0;
 
-let tasks = [];
-tasks.push(new Task('Clean the room very good'));
-tasks.push(new Task('Clean coffee machine'));
-tasks.push(new Task());
+let taskList = new TaskList();
+taskList.addTask(new Task('Clean the room very good'));
+taskList.addTask(new Task('Clean coffee machine'));
+taskList.addTask(new Task());
 
 // Task.printTasksList(tasks);
 
-console.log(tasks[0].done);
+for (let task of taskList){
+    console.log(task.title);
+}
+
 
 

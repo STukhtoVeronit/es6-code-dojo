@@ -28,6 +28,6 @@
 //well know symbol iterator ======
 
 let object = {
-    iterator: 0
+    iterator: 0,
     [Symbol.iterator]() {}
-}
+};
